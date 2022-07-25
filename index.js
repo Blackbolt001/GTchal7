@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 let badge;
 
 
-inquirer.prompt(
+const questions = 
  [
 
 
@@ -15,7 +15,7 @@ inquirer.prompt(
   },{
     type:'input',
     name:'Description',
-    message: 'In a brief message, decribe your project',
+    message: 'In a brief message, decribe your project...',
   },{
     type:'input',
     name:'instillation',
@@ -51,35 +51,37 @@ inquirer.prompt(
     name:'test',
     message:'is there a test for this program',
   }]
-  ).then((response) =>
+
+inquirer.prompt(questions).then((answers) =>
 {
-     const {
-    title,
-    Description,
-    Instillation,
-    Usage,
-    Contribution,
-    Github,
-    LinkedIn,
-    Email,
-    licence,
-    test ,
-      } =response;
-      if(licence=== 'MIT')
-      { badge= 'MIT'}
-      if (licence=== 'Apache')
-      {badge = 'Apache'}
-      if (licence === 'Academic')
-      {badge = 'Academic'}
-      if (licence === 'Open')
-      {badge = 'Open'}
+const answersText = generateREADME ({...answers});
+const Title = answers.Title + '.md';
+console.log(answersText);
 
-      
-     console.log(licence)
-    fs.writeFile('README.md',`# ${title}
-  
+fs.writeFile(Title,answersText, function (error) 
+{
+if(error){
+  console.log(error)
+}
+console.log("You have sucsessfully generated a README!!");
+})
 
-${badge}
+function generateREADME(answers)  
+{
+  return `
+  ${badge}
+## Table of Contents:
+    1.[Title]
+    2.[Description]
+    3.[Instillation]
+    4.[Usage]
+    5.[Contribution]
+    6.[Github]
+    7.[LinkedIn]
+    8.[Email]
+    9.[licence]
+    10.[test]
+          
 
   *[Description](#Description)
   *[Instillation](#instillation)
@@ -87,9 +89,9 @@ ${badge}
   *[Contribution](#Contribution)
   *[ licence]( licence)
   ##Description
-  ${Description}
+  ${answers.Description}
   ##Instillation
-  ${Instillation}
+  ${answers.Instillation}
   ## Usage
   ${Usage}
   ## Contribution
@@ -99,12 +101,9 @@ ${badge}
   ## test
   ${test}
 
-  # Contact information
+  ## Contact information
   *Github :${Github}
   *LinkIn :${LinkedIn}
-  *Email  :${Email}`, 
+  *Email  :${Email}` 
+}});
 
-  (error) => {   
-    if(error){
-      console.log(error)
-}})})
