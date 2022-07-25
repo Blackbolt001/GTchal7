@@ -10,7 +10,7 @@ const questions =
 
   {
     type:'input',
-    name:'title',
+    name:'Title',
     message: ' What would you like your title to be?',
   },{
     type:'input',
@@ -39,7 +39,7 @@ const questions =
   },{
     type:'input',
     name:'Email:',
-    message:'enter your email address linked to this project',
+    message:'enter your email address linked to this project(Email must be valid for README to generate!)',
   },{
     type:'checkbox',
     name: 'license',
@@ -55,7 +55,7 @@ const questions =
 inquirer.prompt(questions).then((answers) =>
 {
 const answersText = generateREADME ({...answers});
-const Title = answers.Title + '.md';
+const Title = 'README' + '.md';
 console.log(answersText);
 
 fs.writeFile(Title,answersText, function (error) 
@@ -68,7 +68,7 @@ console.log("You have sucsessfully generated a README!!");
 
 function generateREADME(answers)  
 {
-  return `
+  return`
   ${badge}
 ## Table of Contents:
     1.[Title]
@@ -93,17 +93,17 @@ function generateREADME(answers)
   ##Instillation
   ${answers.Instillation}
   ## Usage
-  ${Usage}
+  ${answers.Usage}
   ## Contribution
-  ${Contribution}
+  ${answers.Contribution}
   ## License
-  ${licence}
+  ${answers.licence}
   ## test
-  ${test}
+  ${answers.test}
 
   ## Contact information
-  *Github :${Github}
-  *LinkIn :${LinkedIn}
-  *Email  :${Email}` 
+  *Github :${answers.Github}
+  *LinkIn :${answers.LinkedIn}
+  *Email  :${answers.Email}` 
 }});
 
