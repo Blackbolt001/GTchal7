@@ -1,6 +1,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+
 let badge;
+
 
 inquirer.prompt(
  [
@@ -49,7 +51,9 @@ inquirer.prompt(
     name:'test',
     message:'is there a test for this program',
   }]
-  ).then(({
+  ).then((response) =>
+{
+     const {
     title,
     Description,
     Instillation,
@@ -59,18 +63,32 @@ inquirer.prompt(
     LinkedIn,
     Email,
     licence,
-    test 
-  }) => { 
+    test ,
+      } =response;
+      if(licence=== 'MIT')
+      { badge= 'MIT'}
+      if (licence=== 'Apache')
+      {badge = 'Apache'}
+      if (licence === 'Academic')
+      {badge = 'Academic'}
+      if (licence === 'Open')
+      {badge = 'Open'}
 
-  const template = `# ${title}
+      
+     console.log(licence)
+    fs.writeFile('README.md',`# ${title}
+  
+
+${badge}
+
   *[Description](#Description)
   *[Instillation](#instillation)
   *[Usage](#Usage)
   *[Contribution](#Contribution)
   *[ licence]( licence)
-  #Description
+  ##Description
   ${Description}
-  #Instillation
+  ##Instillation
   ${Instillation}
   ## Usage
   ${Usage}
@@ -84,17 +102,9 @@ inquirer.prompt(
   # Contact information
   *Github :${Github}
   *LinkIn :${LinkedIn}
-  *Email  :${Email}`;
+  *Email  :${Email}`, 
 
- createnewFile(title,template);
-  });
- 
-function createnewFile(README,template) {
-
-  fs.writeFile('./README.md',data,(err)=>{
-    if(err){
-      console.log(err)
-    }
-    console.log('README.md has been created!!!');
-  })}
-  
+  (error) => {   
+    if(error){
+      console.log(error)
+}})})
