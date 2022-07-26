@@ -29,7 +29,7 @@ function generateMarkdown(data)
   ## Contribution
   ${data.Contribution}
   ## License
-  ${renderLicenseSection(data.licence)}
+  ${(data.license)}
   ## test
   ${data.test}
 
@@ -47,22 +47,17 @@ function renderLicenseSection(license) {
  {return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
 }
 if (license === 'Academic')
-{return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
+{return `[![License: Hippocratic 2.1](https://img.shields.io/badge/License-Hippocratic_2.1-lightgrey.svg)](https://firstdonoharm.dev)`;
 }
 if (license === 'Open')
-{return `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
-}}
-
-
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
+{return `[![License: ODbL](https://img.shields.io/badge/License-PDDL-brightgreen.svg)](https://opendatacommons.org/licenses/pddl/)`;
+}
 
 
 
+
+
+
+}
 
 module.exports = generateMarkdown;
