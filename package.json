@@ -2,5 +2,24 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "inquirer": "^6.3.1"
-  }
+  },
+  "name": "gtchal9",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blackbolt001/GTchal9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blackbolt001/GTchal9/issues"
+  },
+  "homepage": "https://github.com/Blackbolt001/GTchal9#readme",
+  "description": ""
 }

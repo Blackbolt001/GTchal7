@@ -1,12 +1,9 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 
-let badge;
-
-
-const questions = 
- [
-
+  inquirer.prompt(
+[
 
   {
     type:'input',
@@ -52,58 +49,15 @@ const questions =
     message:'is there a test for this program',
   }]
 
-inquirer.prompt(questions).then((answers) =>
-{
-const answersText = generateREADME ({...answers});
-const Title = 'README' + '.md';
-console.log(answersText);
+  )
 
-fs.writeFile(Title,answersText, function (error) 
+.then((data) => 
+{
+  const generateReadme = generateMarkdown(data);
+fs.writeFile('README.md',generateReadme, function (error) 
 {
 if(error){
   console.log(error)
 }
-console.log("You have sucsessfully generated a README!!");
-})
-
-function generateREADME(answers)  
-{
-  return`
-  ${badge}
-## Table of Contents:
-    1.[Title]
-    2.[Description]
-    3.[Instillation]
-    4.[Usage]
-    5.[Contribution]
-    6.[Github]
-    7.[LinkedIn]
-    8.[Email]
-    9.[licence]
-    10.[test]
-          
-
-  *[Description](#Description)
-  *[Instillation](#instillation)
-  *[Usage](#Usage)
-  *[Contribution](#Contribution)
-  *[ licence]( licence)
-  ##Description
-  ${answers.Description}
-  ##Instillation
-  ${answers.Instillation}
-  ## Usage
-  ${answers.Usage}
-  ## Contribution
-  ${answers.Contribution}
-  ## License
-  ${answers.licence}
-  ## test
-  ${answers.test}
-
-  ## Contact information
-  *Github :${answers.Github}
-  *LinkIn :${answers.LinkedIn}
-  *Email  :${answers.Email}` 
-}});
-
+console.log("You have sucsessfully generated a README!!")
+})})
